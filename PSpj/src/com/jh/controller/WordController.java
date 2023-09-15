@@ -1,5 +1,8 @@
 package com.jh.controller;
 
+import java.util.ArrayList;
+
+import com.jh.model.vo.Word;
 import com.jh.service.WordService;
 
 public class WordController {
@@ -28,7 +31,37 @@ public class WordController {
 	
 	
 	public void showAllWord(int userNo) {
+		ArrayList<Word> list = new WordService().showAllWord(userNo);
+		
+		System.out.println("영어\t한국어");
+		for(Word w : list) {
+			System.out.println(w);
+		}
+	}
+	
+	
+	
+	
+	public void updateWord(int userNo, String eng, String uEng, String uKor) {
+		
+		Word w = new Word();
+		w.setWordEng(uEng);
+		w.setWordKor(uKor);
+		
+		int result = new WordService().updateWord(userNo,eng,w);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

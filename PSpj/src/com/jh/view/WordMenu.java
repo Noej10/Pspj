@@ -34,7 +34,7 @@ public class WordMenu {
 					deleteWord(m.getUserNo());
 				}break;
 				case 3:{
-					
+					updateWord(m.getUserNo());
 				}break;
 				case 4:{
 					
@@ -78,6 +78,7 @@ public class WordMenu {
 	
 	public void deleteWord(int userNo) {
 		
+		wc.showAllWord(userNo);
 		System.out.print("삭제할 영단어를 입력하세요. : ");
 		String eng = sc.next();
 		
@@ -85,7 +86,18 @@ public class WordMenu {
 	}
 	
 	
-	
+	public void updateWord(int userNo) {
+		wc.showAllWord(userNo);
+		System.out.print("변경하고싶은 영단어를 입력하세요. : ");
+		String eng = sc.next();
+		
+		System.out.print("변경할 영단어를 입력하세요. : ");
+		String uEng = sc.next();
+		System.out.print("변경할 한국어를 입력하세요. : ");
+		String uKor = sc.next();
+		
+		wc.updateWord(userNo,eng,uEng,uKor);
+	}
 	
 	
 	
