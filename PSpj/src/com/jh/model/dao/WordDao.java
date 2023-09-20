@@ -107,7 +107,7 @@ public class WordDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = "UPDATE TB_WORD SET WORD_ENG = ?, WORD_KOR = ? WHERE USER_ID= ? AND WORD_ENG = ?";
+		String sql = "UPDATE TB_WORD SET WORD_ENG = ?, WORD_KOR = ? WHERE USER_NO= ? AND WORD_ENG = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -128,6 +128,87 @@ public class WordDao {
 		
 		return result;
 	}
+	
+	public ArrayList<Word> searchEng(Connection conn, int userNo, String eng) {
+		
+		ResultSet rSet = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Word> list = new ArrayList<Word>();
+		
+		String sql = "SELECT * FROM TB_WORD WHERE WORD_ENG = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, eng);
+			
+			rSet = pstmt.executeQuery();
+			
+			while(rSet.next()) {
+				Word w = new Word();
+				w.setUserNO(rSet.getInt("USER_NO"));
+				w.setWordEng(rSet.getString("WORD_ENG"));
+				w.setWordKor(rSet.getString("WORD_KOR"));
+				w.setWordListNo(0);
+				
+				list.add(w);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rSet);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return list;
+	}
+	
+	
+	
+public ArrayList<Word> searchKor(Connection conn, int userNo, String kor) {
+		
+		ResultSet rSet = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Word> list = new ArrayList<Word>();
+		
+		String sql = "SELECT * FROM TB_WORD WHERE WORD_KOR = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, kor);
+			
+			rSet = pstmt.executeQuery();
+			
+			while(rSet.next()) {
+				Word w = new Word();
+				w.setUserNO(rSet.getInt("USER_NO"));
+				w.setWordEng(rSet.getString("WORD_ENG"));
+				w.setWordKor(rSet.getString("WORD_KOR"));
+				w.setWordListNo(0);
+				
+				list.add(w);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rSet);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return list;
+	}
+	
+	
+	
 	
 	
 }

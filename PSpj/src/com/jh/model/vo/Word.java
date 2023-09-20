@@ -6,11 +6,12 @@ public class Word {
 	private String wordEng;
 	private String wordKor;
 	private int wordListNo;
+
 	
 	public Word() {
 		
 	}
-
+	
 	public int getUserNO() {
 		return userNO;
 	}

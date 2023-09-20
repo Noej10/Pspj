@@ -71,5 +71,28 @@ public class WordService {
 		return result;
 	}
 	
+	
+	public ArrayList<Word> searchEng(int userNo, String eng) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Word> list = new WordDao().searchEng(conn,userNo,eng);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
+	}
+	
+	public ArrayList<Word> searchKor(int userNo, String kor) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Word> list = new WordDao().searchKor(conn,userNo,kor);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
+	}
+	
+	
+	
 
 }
