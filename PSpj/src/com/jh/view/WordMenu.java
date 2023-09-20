@@ -1,17 +1,15 @@
 package com.jh.view;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.jh.controller.WordController;
+import com.jh.controller.WordListController;
 import com.jh.model.vo.Member;
-import com.jh.model.vo.Word;
-import com.jh.service.WordService;
 
 public class WordMenu {
 	Scanner sc = new Scanner(System.in);
 	WordController wc = new WordController();
-	
+	WordListController wlc = new WordListController();
 	public void wordMenu(Member m) {
 		
 		boolean isLoop = true;
@@ -23,7 +21,7 @@ public class WordMenu {
 			System.out.println("4. 단어 검색");
 			System.out.println("5. 단어 전체 보기");
 			System.out.println("6. 단어 퀴즈");
-			System.out.println("7. 단어장 등록");
+			System.out.println("7. 내 단어장 등록");
 			System.out.println("8. 등록된 단어장 보기");
 			System.out.println("9. 로그아웃");
 			System.out.print("메뉴 번호 : ");
@@ -49,10 +47,10 @@ public class WordMenu {
 					quizWord(m.getUserNo());
 				}break;
 				case 7:{
-					
+					addList(m.getUserNo());
 				}break;
 				case 8:{
-					
+					showWordList(m.getUserNo());
 				}break;
 				case 9:{
 					isLoop=false;
@@ -160,6 +158,28 @@ public class WordMenu {
 			}
 		}
 	}
+	
+	public void addList(int userNo) {
+		System.out.println("등록될 단어장의 이름을 입력해주세요.");
+		System.out.print("단어장 이름 : ");
+		String wordListTitle = sc.next();
+		System.out.print("표시될 작성자 이름 : ");
+		String wordListUser = sc.next();
+		
+		wlc.addList(userNo,wordListTitle,wordListUser);
+	}
+	
+	
+	public void showWordList(int userNo) {
+		wlc.showWordList(userNo);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

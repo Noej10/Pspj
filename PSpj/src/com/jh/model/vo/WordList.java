@@ -72,8 +72,7 @@ public class WordList {
 
 	@Override
 	public String toString() {
-		return wordListTitle + "\t" + wordListUser + "\t"
-				+ wordListEng + "\t" + wordListKor;
+		return wordListTitle + "\t" + wordListUser;
 	}
 	
 	
