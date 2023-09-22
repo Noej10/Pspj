@@ -137,7 +137,7 @@ public class WordListController {
 		System.out.println("걸린시간 : "+esTime);
 		
 		
-		int quiznum = new WordListService().takeQuizNo(wordListTitle,userNo);
+		
 		new WordListService().quizStart(wordListTitle,userNo,point,esTime);
 		
 		

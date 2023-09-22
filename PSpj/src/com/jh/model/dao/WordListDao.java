@@ -212,6 +212,11 @@ public class WordListDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setString(1, wordListTitle);
+			pstmt.setInt(2, userNo);
+			
+			rSet = pstmt.executeQuery();
+			
 			if(rSet.next()) {
 				quizNo = rSet.getInt("QUIZ_NO");
 			}
