@@ -1,12 +1,12 @@
 package com.jh.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Date;
 
-
+import com.jh.model.vo.Quiz;
 import com.jh.model.vo.QuizWord;
 import com.jh.model.vo.Word;
 import com.jh.model.vo.WordList;
@@ -64,7 +64,7 @@ public class WordListController {
 				wordListQuiz(list.get(selnum-1).getWordListTitle(),wl,userNo);
 			}break;
 			case 3:{
-				
+				showQuizrecord(list.get(selnum-1).getWordListTitle());
 			}break;
 			case 9:{
 				
@@ -137,7 +137,7 @@ public class WordListController {
 		System.out.println("걸린시간 : "+esTime);
 		
 		
-		
+		int quiznum = new WordListService().takeQuizNo(wordListTitle,userNo);
 		new WordListService().quizStart(wordListTitle,userNo,point,esTime);
 		
 		
@@ -145,9 +145,22 @@ public class WordListController {
 		//여기서 끝나는 시간 잡아주면서 최종 걸린 시간,포인트 잡아주고
 		
 		
+	}
+	
+	
+	
+	public void showQuizrecord(String wordListTitle) {
 		
+		ArrayList<Quiz> list = new WordListService().showQuizrecord(wordListTitle);
+		
+		
+		System.out.println("점수\t걸린시간\t회원아이디");
+		for(Quiz q : list) {
+			System.out.println(q);
+		}
 		
 	}
+	
 	
 	
 

@@ -6,6 +6,7 @@ public class Quiz {
 	private String quizTime;
 	private String quizTitle;
 	private int userNo;
+	private String userId;
 	
 	public Quiz() {
 		
@@ -59,7 +60,18 @@ public class Quiz {
 		this.userNo = userNo;
 	}
 	
+	public String getuserId() {
+		return userId;
+	}
+
+	public void setuserId(String userId) {
+		this.userId = userId;
+	}
 	
+	public String toString() {
+		return quizPoint + "\t" + quizTime + "\t" + userId;
+		
+	}
 	
 	
 	

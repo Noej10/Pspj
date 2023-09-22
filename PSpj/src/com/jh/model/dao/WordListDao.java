@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.jh.common.JDBCTemplate;
+import com.jh.model.vo.Quiz;
 import com.jh.model.vo.Word;
 import com.jh.model.vo.WordList;
 
@@ -200,34 +201,69 @@ public class WordListDao {
 //	}
 //	
 //	
-//	public int takeQuizNo(Connection conn, String wordListTitle, int userNo) {
-//		int quizNo = 0;
-//		ResultSet rSet = null;
-//		PreparedStatement pstmt = null;
-//		
-//		String sql = "SELECT * FROM TB_QUIZ WHERE QUIZ_TITLE = ? AND QUIZ_USER_NO = ? ORDER BY QUIZ_STARTDATE DESC";
-//		
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			if(rSet.next()) {
-//				quizNo = rSet.getInt("QUIZ_NO");
-//			}
-//			
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rSet);
-//			JDBCTemplate.close(pstmt);
-//		}
-//		
-//		
-//		
-//		return quizNo;
-//		
-//	}
+	public int takeQuizNo(Connection conn, String wordListTitle, int userNo) {
+		int quizNo = 0;
+		ResultSet rSet = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "SELECT * FROM TB_QUIZ WHERE QUIZ_TITLE = ? AND QUIZ_USER_NO = ? ORDER BY QUIZ_NO DESC";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			if(rSet.next()) {
+				quizNo = rSet.getInt("QUIZ_NO");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rSet);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return quizNo;
+		
+	}
+	
+	
+	public ArrayList<Quiz> showQuizrecord(Connection conn, String wordListTitle) {
+		ResultSet rSet = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Quiz> list = new ArrayList<Quiz>();
+		
+		String sql = "SELECT QUIZ_POINT, QUIZ_TIME, USER_ID FROM TB_QUIZ JOIN TB_MEMBER ON QUIZ_USER_NO = USER_NO WHERE QUIZ_TITLE = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, wordListTitle);
+			
+			rSet = pstmt.executeQuery();
+			
+			while(rSet.next()) {
+				Quiz quizRecord = new Quiz();
+				quizRecord.setQuizPoint(rSet.getInt("QUIZ_POINT"));
+				quizRecord.setQuizTime(rSet.getString("QUIZ_TIME"));
+				quizRecord.setuserId(rSet.getString("USER_ID"));
+				
+				list.add(quizRecord);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return list;
+		
+	}
 	
 	
 }

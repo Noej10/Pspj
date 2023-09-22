@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.jh.common.JDBCTemplate;
 import com.jh.model.dao.WordListDao;
+import com.jh.model.vo.Quiz;
 import com.jh.model.vo.Word;
 import com.jh.model.vo.WordList;
 
@@ -89,11 +90,23 @@ public class WordListService {
 //		JDBCTemplate.close(conn);
 //	}
 //	
-//	public int takeQuizNo(String wordListTitle,int userNo) {
-//		Connection conn = JDBCTemplate.getConnection();
-//		int quizNo = new WordListDao().takeQuizNo(conn,wordListTitle,userNo);
-//		
-//		return quizNo;
-//	}
+	public int takeQuizNo(String wordListTitle,int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int quizNo = new WordListDao().takeQuizNo(conn,wordListTitle,userNo);
+		
+		return quizNo;
+	}
+	
+	
+	public ArrayList<Quiz> showQuizrecord(String wordListTitle) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Quiz> list = new WordListDao().showQuizrecord(conn,wordListTitle);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
+	}
+	
 	
 }
