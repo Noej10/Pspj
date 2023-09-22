@@ -49,7 +49,51 @@ public class WordListService {
 		
 	}
 	
+	public int addToMyWord(ArrayList<Word> wl,int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new WordListDao().addToMyWord(conn,wl,userNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
+	public void quizStart(String wordListTitle, int userNo, int point, String esTime) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new WordListDao().quizStart(conn,wordListTitle,userNo,point,esTime);
+		
+		if(result>0)
+			JDBCTemplate.commit(conn);
+		else
+			JDBCTemplate.rollback(conn);
+		
+		JDBCTemplate.close(conn);
+		
+	}
 	
+//	public void quizEnd(int quizNo, int point) {
+//		Connection conn = JDBCTemplate.getConnection();
+//		int result = new WordListDao().quizEnd(conn,quizNo,point);
+//		
+//		if(result>0)
+//			JDBCTemplate.commit(conn);
+//		else
+//			JDBCTemplate.rollback(conn);
+//		
+//		JDBCTemplate.close(conn);
+//	}
+//	
+//	public int takeQuizNo(String wordListTitle,int userNo) {
+//		Connection conn = JDBCTemplate.getConnection();
+//		int quizNo = new WordListDao().takeQuizNo(conn,wordListTitle,userNo);
+//		
+//		return quizNo;
+//	}
 	
 }

@@ -17,7 +17,7 @@ public class WordDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = "INSERT INTO TB_WORD(USER_NO,WORD_ENG,WORD_KOR) VALUES(?,?,?)";
+		String sql = "INSERT INTO TB_WORD VALUES(?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

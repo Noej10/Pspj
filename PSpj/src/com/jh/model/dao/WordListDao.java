@@ -19,7 +19,7 @@ public class WordListDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = "INSERT INTO TB_WORDLIST VALUES(SEQ_WORDLISTNO.NEXTVAL,?,?,?,?,?)";
+		String sql = "INSERT INTO TB_WORDLIST VALUES(?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -69,6 +69,8 @@ public class WordListDao {
 			}
 			
 			
+	
+			
 			
 			
 		} catch (SQLException e) {
@@ -116,6 +118,116 @@ public class WordListDao {
 		
 		return list;
 	}
+	
+	public int addToMyWord(Connection conn, ArrayList<Word> wl, int userNo){
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql="INSERT INTO TB_WORD VALUES(?,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i=0; i<wl.size(); i++) {
+			pstmt.setInt(1, userNo);
+			pstmt.setString(2, wl.get(result).getWordEng());
+			pstmt.setString(3, wl.get(result).getWordKor());
+			
+			result += pstmt.executeUpdate();
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+		
+		
+	}
+	
+	
+	public int quizStart(Connection conn,String wordListTitle, int userNo, int point, String esTime) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = "INSERT INTO TB_QUIZ VALUES(SEQ_QUIZNO.NEXTVAL,?,?,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, point);
+			pstmt.setString(2, esTime);
+			pstmt.setString(3, wordListTitle);
+			pstmt.setInt(4, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+//	public int quizEnd(Connection conn,int quizNo, int point) {
+//		int result = 0;
+//		PreparedStatement pstmt = null;
+//		
+//		String sql = "UPDATE TB_QUIZ SET QUIZ_POINT = ?, QUIZ_ENDDATE = SYSDATE WHERE QUIZ_NO = ?";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, point);
+//			pstmt.setInt(2, quizNo);
+//			
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(pstmt);
+//		}
+//		
+//		return result;
+//	}
+//	
+//	
+//	public int takeQuizNo(Connection conn, String wordListTitle, int userNo) {
+//		int quizNo = 0;
+//		ResultSet rSet = null;
+//		PreparedStatement pstmt = null;
+//		
+//		String sql = "SELECT * FROM TB_QUIZ WHERE QUIZ_TITLE = ? AND QUIZ_USER_NO = ? ORDER BY QUIZ_STARTDATE DESC";
+//		
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			if(rSet.next()) {
+//				quizNo = rSet.getInt("QUIZ_NO");
+//			}
+//			
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rSet);
+//			JDBCTemplate.close(pstmt);
+//		}
+//		
+//		
+//		
+//		return quizNo;
+//		
+//	}
 	
 	
 }
