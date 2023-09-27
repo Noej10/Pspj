@@ -1,4 +1,6 @@
+-- * 계정 이름 : MINIPJ 비밀번호: MINIPJ 로 세팅하여 계정 생성
 -- * 테이블 생성 및 더미 데이터 세팅(주석 확인하며, 추가!)
+
 
 -- 멤버 테이블 DROP & CREATE
 DROP TABLE TB_MEMBER;
