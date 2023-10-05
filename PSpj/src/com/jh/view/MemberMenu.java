@@ -16,7 +16,7 @@ public class MemberMenu {
 		
 		
 		while(true) {
-			System.out.println("== 단 어 장 로 그 인 ==");
+			System.out.println("\n== 단 어 장 로 그 인 ==");
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
 			System.out.println("3. 회원탈퇴");
@@ -57,23 +57,23 @@ public class MemberMenu {
 	
 	
 	public void joinMembership() {
-		System.out.println("== 회 원 가 입 ==");
+		System.out.println("\n== 회 원 가 입 ==");
 		
 		System.out.print("ID를 입력해주세요.");
-		String id = sc.nextLine();
+		String id = sc.next();
 		
 		System.out.print("비밀번호를 입력해주세요.");
-		String pw= sc.nextLine();
+		String pw= sc.next();
 		
 		System.out.print("이름을 입력해주세요.");
-		String name = sc.nextLine();
+		String name = sc.next();
 		
 		mc.joinMembership(id,pw,name);
 		
 	}
 	
 	public void exitMembership() {
-		System.out.println("아이디와 비밀번호를 입력해주세요.");
+		System.out.println("\n아이디와 비밀번호를 입력해주세요.");
 		
 		System.out.print("아이디 : ");
 		String id = sc.next();
@@ -84,7 +84,7 @@ public class MemberMenu {
 		
 		switch(sc.next().toUpperCase().charAt(0)){
 			case 'Y':{
-				mc.exitMembership();
+				mc.exitMembership(id,pw);
 			}break;
 			case 'N':{
 				System.out.println("메인 메뉴로 돌아갑니다.");
@@ -96,7 +96,7 @@ public class MemberMenu {
 	}
 	
 	public void login() {
-		System.out.println("아이디와 비밀번호를 입력해주세요.");
+		System.out.println("\n아이디와 비밀번호를 입력해주세요.");
 		
 		System.out.print("아이디 : ");
 		String id = sc.next();
@@ -109,7 +109,7 @@ public class MemberMenu {
 	
 	
 	public void changePassword() {
-		System.out.println("아이디와 이름을 입력해주세요.");
+		System.out.println("\n아이디와 이름을 입력해주세요.");
 		
 		System.out.print("아이디 : ");
 		String id = sc.next();

@@ -17,9 +17,36 @@ public class MemberController {
 		
 		int result = new MemberService().joinMembership(m);
 		
+		if(result>0) {
+			System.out.println("환영합니다. "+name+"님! 회원 가입이 정상적으로 완료되었습니다.");
+		}else {
+			System.out.println("회원가입에 실패했습니다.");
+		}
+		
 	}
 	
-	public void exitMembership() {
+	public void exitMembership(String id, String pw) {
+		Member m = new MemberService().login(id,pw);
+		
+		
+		if(m.getUserId().equals(id) && m.getUserPw().equals(pw)) {
+			new WordController().deleteAllWord(m.getUserNo());
+			int result = new MemberService().exitMembership(id,pw);
+			
+			if(result>0) {
+				System.out.println("회원 탈퇴가 정상적으로 완료되었습니다.");
+			}else {
+				System.out.println("회원 탈퇴에 실패했습니다.(서버 오류)");
+			}
+			
+		}else{
+			System.out.println("입력하신 아이디 또는 비밀번호가 맞지 않습니다.");
+		}
+
+		
+		
+		
+		
 		
 	}
 	
@@ -80,3 +107,15 @@ public class MemberController {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

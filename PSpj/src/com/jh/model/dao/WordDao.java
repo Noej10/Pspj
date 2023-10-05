@@ -63,6 +63,31 @@ public class WordDao {
 		
 	}
 	
+	
+	public int deleteAllWord(Connection conn,int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM TB_WORD WHERE USER_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
 	public ArrayList<Word> showAllWord(Connection conn, int userNo) {
 		
 		ResultSet rSet = null;
@@ -135,12 +160,13 @@ public class WordDao {
 		PreparedStatement pstmt = null;
 		ArrayList<Word> list = new ArrayList<Word>();
 		
-		String sql = "SELECT * FROM TB_WORD WHERE WORD_ENG = ?";
+		String sql = "SELECT * FROM TB_WORD WHERE WORD_ENG = ? AND USER_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, eng);
+			pstmt.setInt(2, userNo);
 			
 			rSet = pstmt.executeQuery();
 			
@@ -175,12 +201,13 @@ public ArrayList<Word> searchKor(Connection conn, int userNo, String kor) {
 		PreparedStatement pstmt = null;
 		ArrayList<Word> list = new ArrayList<Word>();
 		
-		String sql = "SELECT * FROM TB_WORD WHERE WORD_KOR = ?";
+		String sql = "SELECT * FROM TB_WORD WHERE WORD_KOR = ? AND USER_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, kor);
+			pstmt.setInt(2, userNo);
 			
 			rSet = pstmt.executeQuery();
 			

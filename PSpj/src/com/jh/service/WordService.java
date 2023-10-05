@@ -40,6 +40,21 @@ public class WordService {
 		return result;
 	}
 	
+	
+	public void deleteAllWord(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new WordDao().deleteAllWord(conn,userNo);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+	}
+	
+	
 	public ArrayList<Word> showAllWord(int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Word> list = new WordDao().showAllWord(conn, userNo);

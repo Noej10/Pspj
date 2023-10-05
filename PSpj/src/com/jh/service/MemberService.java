@@ -26,6 +26,24 @@ public class MemberService {
 		return result;
 	}
 	
+	
+	public int exitMembership(String id, String pw) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().exitMembership(conn,id,pw);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+	
 	public Member login(String id, String pw) {
 		
 		Connection conn = JDBCTemplate.getConnection();

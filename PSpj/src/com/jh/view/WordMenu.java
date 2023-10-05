@@ -14,7 +14,7 @@ public class WordMenu {
 		
 		boolean isLoop = true;
 		while(isLoop) {	
-			System.out.println("======= "+m.getUserName()+"의 단어장 =======");
+			System.out.println("\n======= "+m.getUserName()+"의 단어장 =======");
 			System.out.println("1. 단어 추가");
 			System.out.println("2. 단어 삭제");
 			System.out.println("3. 단어 수정");
@@ -77,6 +77,8 @@ public class WordMenu {
 	
 	
 	
+	
+	
 	public void deleteWord(int userNo) {
 		
 		wc.showAllWord(userNo);
@@ -126,7 +128,8 @@ public class WordMenu {
 				}break;
 				case 9:{
 					System.out.println("메인 메뉴로 돌아갑니다.");
-				}break;
+					return;
+				}
 				default:{
 					System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
 				}

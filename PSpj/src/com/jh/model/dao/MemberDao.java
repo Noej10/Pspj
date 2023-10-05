@@ -35,6 +35,32 @@ public class MemberDao {
 		return result;
 	}
 	
+	
+	public int exitMembership(Connection conn, String id, String pw) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM TB_MEMBER WHERE USER_ID = ? AND USER_PW = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	
 	public Member login(Connection conn, String id, String pw) {
 		
 		Member m = null; 

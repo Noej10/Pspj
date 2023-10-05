@@ -36,12 +36,25 @@ public class WordController {
 	}
 	
 	
+	public void deleteAllWord(int userNo) {
+		new WordService().deleteAllWord(userNo);
+	}
+	
+	
+	
+	
+	
 	public void showAllWord(int userNo) {
 		ArrayList<Word> list = new WordService().showAllWord(userNo);
 		
-		System.out.println("영어\t한국어");
+		if(list.isEmpty()) {
+			System.out.println("등록된 단어가 없습니다.\n단어를 등록해주세요!");
+		}
+		else {
+		System.out.println("\n영어\t한국어");
 		for(Word w : list) {
 			System.out.println(w);
+		}
 		}
 	}
 	
@@ -69,10 +82,17 @@ public class WordController {
 	public void searchEng(int userNo, String eng) {
 		ArrayList<Word> list = new WordService().searchEng(userNo,eng);
 		
-		System.out.println("영어\t한국어");
-		for(Word w : list) {
-			System.out.println(w);
+		if(list.isEmpty()) {
+			System.out.println("검색하신 단어를 찾을 수 없습니다.");
+		}else {
+			System.out.println("영어\t한국어");
+			for(Word w : list) {
+				System.out.println(w);
+			}
 		}
+		
+		
+	
 		
 	}
 	
@@ -82,10 +102,16 @@ public class WordController {
 		
 		ArrayList<Word> list = new WordService().searchKor(userNo,kor);
 		
-		System.out.println("영어\t한국어");
-		for(Word w : list) {
-			System.out.println(w);
+		if(list.isEmpty()) {
+			System.out.println("검색하신 단어를 찾을 수 없습니다.");
+		}else {
+			System.out.println("영어\t한국어");
+			for(Word w : list) {
+				System.out.println(w);
+			}
 		}
+		
+		
 		
 	}
 	
